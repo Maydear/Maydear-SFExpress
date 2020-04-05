@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageProjectUrl>https://github.com/Maydear/Maydear-SFExpress</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Maydear/Maydear-SFExpress.git</RepositoryUrl>
+    <PackageIconUrl>http://oss.lvcoco.com/static/logo.png</PackageIconUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <Icon>icon.png</Icon>
+    <IconUrl>http://oss.lvcoco.com/static/logo.png</IconUrl>
+    <PackageLicenseFile>LICENSE-2.0.txt</PackageLicenseFile>
+    <RepositoryType>git</RepositoryType>
+    <Copyright>Maydear Team (admin@maydear.com)</Copyright>
+    <Authors>Kelvin</Authors>
+    <Company></Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Title>Maydear Mvc 扩展</Title>
+    <Description>顺丰快递(丰桥)的SDK</Description>
+    <Version>2.3.107</Version>
+    <AssemblyName>Maydear.SFExpress</AssemblyName>
+    <NeutralLanguage>zh-CN</NeutralLanguage>
+    <Language>zh-CN</Language>
+    <PackageTags>Maydear.SFExpress sf-express 顺丰sdk 丰桥sdk</PackageTags>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)'=='Release|netstandard2.0'">
+    <DocumentationFile>bin\Release\netstandard2.0\Maydear.Mvc.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <DocumentationFile>bin\Release\Maydear.xml</DocumentationFile>
+    <OutputPath>..\..\publish\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\LICENSE-2.0.txt" Pack="true" Visible="false" PackagePath="" />
+    <None Include="..\..\icon.png" Pack="true" Visible="false" PackagePath="" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Maydear" Version="2.3.107" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Internal\Requests\RequestBody.cs" />
+  </ItemGroup>
+</Project>

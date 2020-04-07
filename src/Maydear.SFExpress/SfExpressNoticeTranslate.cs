@@ -11,9 +11,11 @@ namespace Maydear.SFExpress
     /// </summary>
     public static class SfExpressNoticeTranslate
     {
-
         /// <summary>
         /// 路由通知报文解析处理
+        /// <para>
+        /// 详细说明请查看丰桥API说明<seealso cref="https://qiao.sf-express.com/pages/developDoc/index.html?level2=532019"/>
+        /// </para>
         /// </summary>
         /// <param name="xmlString">报文字符</param>
         /// <param name="actionProcess">报文解析后执行的处理</param>
@@ -43,6 +45,9 @@ namespace Maydear.SFExpress
 
         /// <summary>
         /// 订单状态通知报文解析处理
+        /// <para>
+        /// 详细说明请查看丰桥API说明<seealso cref="https://qiao.sf-express.com/pages/developDoc/index.html?level2=330428"/>
+        /// </para>
         /// </summary>
         /// <param name="xmlString">报文字符</param>
         /// <param name="actionProcess">报文解析后执行的处理</param>

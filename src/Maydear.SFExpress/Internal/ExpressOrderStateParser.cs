@@ -11,19 +11,29 @@ namespace Maydear.SFExpress.Internal
     {
         public static ExpressOrderState Parse(string xmlString)
         {
-            XmlDocument xmlDocument = xmlString?.ToXmlDocument();
+            var xmlDocument = xmlString?.ToXmlDocument();
 
             if (xmlDocument == null)
+            {
                 return null;
+            }
 
             var requestNodeList = xmlDocument.GetElementsByTagName("Request");
 
             if (requestNodeList?.Count > 0)
             {
-                var dict = requestNodeList[0].GetAttributes();
+                var nodes = requestNodeList[0].ChildNodes;
 
-                if(dict !=null && dict.Count>0)
+                if (nodes != null && nodes.Count > 0)
                 {
+                    var dict = new Dictionary<string, string>();
+                    foreach (XmlNode item in nodes)
+                    {
+                        if (!string.IsNullOrWhiteSpace(item.InnerText))
+                        {
+                            dict.Add(item.Name, item.InnerText);
+                        }
+                    }
                     if (dict.ContainsKey("carrierCode") && dict.ContainsKey("waybillNo") && dict.ContainsKey("orderStateCode") && dict.ContainsKey("orderStateDesc"))
                     {
                         var expressOrderState = new ExpressOrderState()
@@ -34,7 +44,7 @@ namespace Maydear.SFExpress.Internal
                             CarrierCode = dict["carrierCode"]
                         };
 
-                        if(dict.ContainsKey("orderNo"))
+                        if (dict.ContainsKey("orderNo"))
                         {
                             expressOrderState.OrderId = dict["orderNo"];
                         }

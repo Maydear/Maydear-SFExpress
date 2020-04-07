@@ -39,6 +39,7 @@ namespace Maydear.SFExpress.Internal.Responses
 
             if (headContent.Equals("OK"))
             {
+                Error = null;
                 Body?.Fill(xmlDocument);
             }
             else if (headContent.Equals("ERR"))

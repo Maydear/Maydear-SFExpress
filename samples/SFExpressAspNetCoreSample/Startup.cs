@@ -17,6 +17,7 @@ namespace SFExpressAspNetCoreSample
         public void ConfigureServices(IServiceCollection services)
         {
         }
+
         /// <summary>
         /// 
         /// </summary>

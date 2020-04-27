@@ -89,8 +89,8 @@ namespace Microsoft.Extensions.DependencyInjection
             }
             IPolicyRegistry<string> registry = services.AddPolicyRegistry();
 
-            Polly.Timeout.TimeoutPolicy<HttpResponseMessage> timeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(10));
-            Polly.Timeout.TimeoutPolicy<HttpResponseMessage> longTimeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(60));
+            var timeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(10));
+            var longTimeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(60));
 
             registry.Add("regular", timeout);
             registry.Add("long", longTimeout);

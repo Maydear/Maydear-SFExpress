@@ -128,14 +128,25 @@ namespace Maydear.SFExpress.Internal.Requests
             {
                 throw new ArgumentNullException("Order Filter object mast not null");
             }
-            if (Data.To == null)
-            {
-                throw new ArgumentNullException("OrderFilter.To mast not null");
-            }
             var dic = new Dictionary<string, string>() {
-                { "d_address",$"{Data.To.Province}{Data.To.City}{Data.To.County}{Data.To.Address}"},
                 { "filter_type",((int)Data.FilterType).ToString()}
             };
+            if (string.IsNullOrWhiteSpace(Data.ToFullAddress) && Data.To == null)
+            {
+                throw new ArgumentNullException("OrderFilter.To or OrderFilter.ToFullAddress mast not null ");
+            }
+            else
+            {
+                if (Data.To == null && !string.IsNullOrWhiteSpace(Data.ToFullAddress))
+                {
+                    dic.Add("d_address", Data.ToFullAddress);
+                }
+                else
+                {
+                    dic.Add("d_address", $"{Data.To.Province}{Data.To.City}{Data.To.County}{Data.To.Address}");
+                }
+            }
+            
             return dic;
         }
     }

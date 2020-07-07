@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Maydear.SFExpress;
+using Maydear.SFExpress.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SFExpressAspNetCoreSample.Controllers
 {
+    [Route("OrderConfirm")]
     public class OrderConfirmController : Controller
     {
         private readonly SfExpressService sfExpressService;
@@ -24,9 +26,14 @@ namespace SFExpressAspNetCoreSample.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        public IActionResult Index()
+        [HttpPost]
+        public Task<ExpressOrderConfirmResult> Index(string orderid, string mailNo)
         {
-            return View();
+            return sfExpressService.OrderConfirmAsync(new ExpressOrderConfirm(){
+                DealType = DealType.Cancel,
+                MailNo= mailNo,
+                OrderId= orderid
+            });
         }
     }
 }

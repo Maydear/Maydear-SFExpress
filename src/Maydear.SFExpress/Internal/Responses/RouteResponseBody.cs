@@ -23,7 +23,7 @@ namespace Maydear.SFExpress.Internal.Responses
         /// <param name="xmlDocument"></param>
         public void Fill(XmlDocument xmlDocument)
         {
-            Result = new List<ExpressRouteGroup>();
+           var result = new List<ExpressRouteGroup>();
 
             var routeResponseNodeList = xmlDocument.GetElementsByTagName("RouteResponse");
 
@@ -41,7 +41,7 @@ namespace Maydear.SFExpress.Internal.Responses
                     };
                     if (item.HasChildNodes)
                     {
-                        var routeNodes = new List<ExpressRouteNode>();
+                        var  routeNodes = new List<ExpressRouteNode>();
 
                         foreach (XmlNode route in item.ChildNodes)
                         {
@@ -70,10 +70,12 @@ namespace Maydear.SFExpress.Internal.Responses
                                     routeNodes.Add(routeNode);
                                 }
                             }
-
                         }
+                        routeGroup.Nodes = routeNodes;
                     }
+                    result.Add(routeGroup);
                 }
+                Result = result;
             }
         }
     }

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Maydear.SFExpress;
+using Maydear.SFExpress.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SFExpressAspNetCoreSample.Controllers
 {
+    [Route("OrderFilter")]
     public class OrderFilterController : Controller
     {
         private readonly SfExpressService sfExpressService;
@@ -24,9 +26,14 @@ namespace SFExpressAspNetCoreSample.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        public IActionResult Index()
+        [HttpPost]
+        public Task<ExpressOrderFilterResult> Index(string address)
         {
-            return View();
+            return sfExpressService.OrderFilterAsync(new ExpressOrderFilter()
+            {
+                FilterType= FilterType.Auto,
+                ToFullAddress = address
+            });
         }
     }
 }

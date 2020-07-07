@@ -134,9 +134,9 @@ namespace Maydear.SFExpress
         /// <param name="saveRequestXmlAction">落地请求报文的委托</param>
         /// <param name="saveResponseXmlAction">落地响应报文的委托</param>
         /// <returns>返回地址的筛选结果</returns>
-        public async Task<ExpressOrderFilterResult> OrderFilterAsync(ExpressOrderSearch expressOrderQuery, Action<string> saveRequestXmlAction = null, Action<string> saveResponseXmlAction = null)
+        public async Task<ExpressOrderFilterResult> OrderFilterAsync(ExpressOrderFilter expressOrderFilter, Action<string> saveRequestXmlAction = null, Action<string> saveResponseXmlAction = null)
         {
-            var request = new Request<OrderSearchRequestBody>(new OrderSearchRequestBody(expressOrderQuery), options.ClientCode);
+            var request = new Request<OrderFilterRequestBody>(new OrderFilterRequestBody(expressOrderFilter), options.ClientCode);
             string xmlContent = request.ToXml();
             saveRequestXmlAction?.Invoke(xmlContent);
             var responseStr = await httpClient.PostAsync(xmlContent, BuidVerifyCode(xmlContent));

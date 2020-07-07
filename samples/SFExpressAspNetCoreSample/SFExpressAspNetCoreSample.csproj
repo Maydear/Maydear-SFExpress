@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Maydear.Mvc" Version="2.3.107" />
+      <PackageReference Include="Maydear.Mvc.Caching.Redis" Version="2.3.106.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
   </ItemGroup>

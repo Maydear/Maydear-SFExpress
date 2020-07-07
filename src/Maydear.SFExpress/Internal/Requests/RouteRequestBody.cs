@@ -45,7 +45,7 @@ namespace Maydear.SFExpress.Internal.Requests
             {
                 throw new ArgumentNullException("Route object mast not null");
             }
-            if (Data.TrackingNumber.IsNotEmpty())
+            if (Data.TrackingNumber.IsNullOrEmpty())
             {
                 throw new ArgumentNullException("Route.TrackingNumber mast not Empty");
             }
@@ -60,7 +60,7 @@ namespace Maydear.SFExpress.Internal.Requests
                 dic.Add("reference_number", Data.ReferenceNumber);
             }
 
-            if (!Data.CheckPhoneNo.IsNotEmpty())
+            if (Data.CheckPhoneNo.IsNotEmpty())
             {
                 dic.Add("check_phoneNo", string.Join(",", Data.CheckPhoneNo));
             }

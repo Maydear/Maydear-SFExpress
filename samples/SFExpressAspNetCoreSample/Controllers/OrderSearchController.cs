@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Maydear.SFExpress;
+using Maydear.SFExpress.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SFExpressAspNetCoreSample.Controllers
 {
+    [Route("OrderSearch")]
     public class OrderSearchController : Controller
     {
         private readonly SfExpressService sfExpressService;
@@ -24,9 +26,14 @@ namespace SFExpressAspNetCoreSample.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        public IActionResult Index()
+        [HttpPost]
+        public Task<ExpressOrderBaseResult> Index(string orderid)
         {
-            return View();
+            return sfExpressService.OrderSearchAsync(new Maydear.SFExpress.Models.ExpressOrderSearch()
+            {
+                OrderId = orderid,
+                SearchType = OrderSearchType.Normal
+            });
         }
     }
 }

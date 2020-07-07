@@ -25,6 +25,11 @@ namespace Maydear.SFExpress.Models
         public string CustId { get; set; }
 
         /// <summary>
+        /// 收件完整地址
+        /// </summary>
+        public string ToFullAddress { get; set; }
+
+        /// <summary>
         /// 寄件方
         /// </summary>
         public ContactAddress From { get; set; }

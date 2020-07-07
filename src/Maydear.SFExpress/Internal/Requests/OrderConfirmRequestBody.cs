@@ -80,7 +80,7 @@ namespace Maydear.SFExpress.Internal.Requests
             }
             var dic = new Dictionary<string, string>() {
                 { "orderid",Data.OrderId},
-                { "method_type",((int)Data.DealType).ToString()}
+                { "dealtype",((int)Data.DealType).ToString()}
             };
             if (!Data.MailNo.IsNullOrWhiteSpace())
             {

@@ -118,7 +118,7 @@ namespace Maydear.SFExpress.Internal.Requests
             }
             if (!string.IsNullOrWhiteSpace(Data.To?.County))
             {
-                dic.Add("d_county", Data.From.County);
+                dic.Add("d_county", Data.To.County);
             }
             if (!string.IsNullOrWhiteSpace(Data.CustId))
             {

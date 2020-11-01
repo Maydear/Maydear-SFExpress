@@ -17,6 +17,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{5331219D-E281-4B2C-B759-558AEA101061}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample", "samples\Sample\Sample.csproj", "{2C4005EA-CF68-400E-A176-5C8EA9EEE1A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +31,16 @@ Global
 		{BEF80510-9C0E-44EA-9441-662EEDF856C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEF80510-9C0E-44EA-9441-662EEDF856C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEF80510-9C0E-44EA-9441-662EEDF856C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C4005EA-CF68-400E-A176-5C8EA9EEE1A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C4005EA-CF68-400E-A176-5C8EA9EEE1A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C4005EA-CF68-400E-A176-5C8EA9EEE1A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C4005EA-CF68-400E-A176-5C8EA9EEE1A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2C4005EA-CF68-400E-A176-5C8EA9EEE1A5} = {5331219D-E281-4B2C-B759-558AEA101061}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7C868F82-C987-428E-AE99-B3FCB824580D}

@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Maydear.SFExpress\Maydear.SFExpress.csproj" />
+    <ProjectReference Include="..\..\src\Maydear.SFExpress\Maydear.SFExpress.csproj" />
   </ItemGroup>
 
   <ItemGroup>

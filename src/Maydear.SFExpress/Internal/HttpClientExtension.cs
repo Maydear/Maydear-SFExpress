@@ -1,6 +1,5 @@
-﻿using Maydear.SFExpress.Internal;
+using Maydear.SFExpress.Internal;
 using Maydear.Utilities;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;

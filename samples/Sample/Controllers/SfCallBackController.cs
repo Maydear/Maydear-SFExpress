@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Maydear.SFExpress;
 using Microsoft.AspNetCore.Mvc;
 
-namespace SFExpressAspNetCoreSample.Controllers
+namespace Sample.Controllers
 {
     /// <summary>
     /// 顺丰回调

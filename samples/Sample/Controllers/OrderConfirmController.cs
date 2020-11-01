@@ -5,22 +5,22 @@ using System.Threading.Tasks;
 using Maydear.SFExpress;
 using Maydear.SFExpress.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
-namespace SFExpressAspNetCoreSample.Controllers
+namespace Sample.Controllers
 {
     [Route("OrderConfirm")]
     public class OrderConfirmController : Controller
     {
         private readonly SfExpressService sfExpressService;
+        private readonly ILogger<RouteController> logger;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sfExpressService"></param>
-        public OrderConfirmController(SfExpressService sfExpressService)
+        public OrderConfirmController(SfExpressService sfExpressService, ILogger<RouteController> logger)
         {
             this.sfExpressService = sfExpressService;
+            this.logger = logger;
         }
+
 
         /// <summary>
         /// 
@@ -33,7 +33,7 @@ namespace SFExpressAspNetCoreSample.Controllers
                 DealType = DealType.Cancel,
                 MailNo= mailNo,
                 OrderId= orderid
-            });
+            }, s => logger.LogWarning(s), s => logger.LogWarning(s));
         }
     }
 }

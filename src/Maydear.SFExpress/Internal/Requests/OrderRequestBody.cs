@@ -35,14 +35,17 @@ namespace Maydear.SFExpress.Internal.Requests
         private string ToCargosXml()
         {
             var stringbuilder = new StringBuilder();
-            foreach (var item in Data.Cargos)
+            if (Data.Cargos != null)
             {
-                var countString = string.Empty;
-                if (item.Count > 0)
+                foreach (var item in Data.Cargos)
                 {
-                    countString = $"count='{item.Count}'";
+                    var countString = string.Empty;
+                    if (item.Count > 0)
+                    {
+                        countString = $"count='{item.Count}'";
+                    }
+                    stringbuilder.Append($@"<Cargo name='{item.Name}' {countString}></Cargo>");
                 }
-                stringbuilder.Append($@"<Cargo name='{item.Name}' {countString}></Cargo>");
             }
             return stringbuilder.ToString();
         }
@@ -50,10 +53,13 @@ namespace Maydear.SFExpress.Internal.Requests
         private string ToAddedServicesXml()
         {
             var stringbuilder = new StringBuilder();
-            foreach (var item in Data.AddedServices)
+            if (Data.AddedServices != null)
             {
-                var dict = BuidAddedServiceAttributesMap(item);
-                stringbuilder.Append($@"<AddedService {string.Join(" ", dict.Select(a => $"{a.Key}=\"{a.Value}\""))}></AddedService>");
+                foreach (var item in Data.AddedServices)
+                {
+                    var dict = BuidAddedServiceAttributesMap(item);
+                    stringbuilder.Append($@"<AddedService {string.Join(" ", dict.Select(a => $"{a.Key}=\"{a.Value}\""))}></AddedService>");
+                }
             }
             return stringbuilder.ToString();
         }
@@ -71,27 +77,51 @@ namespace Maydear.SFExpress.Internal.Requests
             {
                 throw new ArgumentNullException("OrderConfirm.OrderId mast not Empty");
             }
-            if (Data.From == null || Data.From.Contact.IsNullOrWhiteSpace() || Data.From.Mobile.IsNullOrWhiteSpace() || Data.From.Address.IsNullOrWhiteSpace())
+            if (Data.From == null || Data.From.Address.IsNullOrWhiteSpace())
             {
                 throw new ArgumentNullException("OrderConfirm.From mast not Empty");
             }
-            if (Data.To == null || Data.To.Contact.IsNullOrWhiteSpace() || Data.To.Address.IsNullOrWhiteSpace() || Data.To.Mobile.IsNullOrWhiteSpace())
+            if (Data.To == null || Data.To.Mobile.IsNullOrWhiteSpace())
             {
                 throw new ArgumentNullException("OrderConfirm.To mast not Empty");
             }
+            if (Data.From.Tel.IsNullOrEmpty() && Data.From.Mobile.IsNullOrEmpty())
+            {
+                throw new ArgumentNullException("OrderConfirm.From.Mobile or OrderConfirm.From.Tel mast not Empty");
+            }
+            if (Data.To.Tel.IsNullOrEmpty() && Data.To.Mobile.IsNullOrEmpty())
+            {
+                throw new ArgumentNullException("OrderConfirm.To.Mobile or OrderConfirm.To.Tel mast not Empty");
+            }
+            if (Data.From.Company.IsNullOrEmpty() && Data.From.Contact.IsNullOrEmpty())
+            {
+                throw new ArgumentNullException("OrderConfirm.From.Company or OrderConfirm.From.Contact mast not Empty");
+            }
+            if (Data.To.Company.IsNullOrEmpty() && Data.To.Contact.IsNullOrEmpty())
+            {
+                throw new ArgumentNullException("OrderConfirm.To.Company or OrderConfirm.To.Contact mast not Empty");
+            }
             var dic = new Dictionary<string, string>() {
                 { "orderid",Data.OrderId},
-                { "j_tel",Data.From.Tel??Data.From.Mobile},
-                { "j_mobile",Data.From.Mobile??Data.From.Tel},
-                { "j_company",Data.From.Company??Data.From.Contact},
-                { "j_contact",Data.From.Contact??Data.From.Company},
-                { "j_address",$"{Data.From.Province??""}{Data.From.City??""}{Data.From.County??""}{Data.From.Address}"},
-                { "d_tel",Data.To.Tel??Data.To.Mobile},
-                { "d_mobile",Data.To.Mobile??Data.To.Tel},
-                { "d_company",Data.To.Company??Data.To.Contact},
-                { "d_contact",Data.To.Contact??Data.To.Company},
-                { "d_address",$"{Data.To.Province??""}{Data.To.City??""}{Data.To.County??""}{Data.To.Address}"},
+                { "j_address",Data.From.Address},
+                { "d_address",Data.To.Address},
             };
+            if (!Data.From.Tel.IsNullOrEmpty())
+            {
+                dic.Add("j_tel", string.Join(",", Data.From.Tel));
+            }
+            if (!Data.From.Mobile.IsNullOrEmpty())
+            {
+                dic.Add("j_mobile", string.Join(",", Data.From.Mobile));
+            }
+            if (!Data.From.Company.IsNullOrEmpty())
+            {
+                dic.Add("j_company", string.Join(",", Data.From.Company));
+            }
+            if (!Data.From.Contact.IsNullOrEmpty())
+            {
+                dic.Add("j_contact", string.Join(",", Data.From.Contact));
+            }
             if (!Data.MailNos.IsNullOrEmpty())
             {
                 dic.Add("mailno", string.Join(",", Data.MailNos));
@@ -99,6 +129,10 @@ namespace Maydear.SFExpress.Internal.Requests
             if (!string.IsNullOrWhiteSpace(Data.From?.Province))
             {
                 dic.Add("j_province", Data.From.Province);
+            }
+            if (!string.IsNullOrWhiteSpace(Data.From?.City))
+            {
+                dic.Add("j_city", Data.From.City);
             }
             if (!string.IsNullOrWhiteSpace(Data.From?.Country))
             {
@@ -108,6 +142,14 @@ namespace Maydear.SFExpress.Internal.Requests
             {
                 dic.Add("j_county", Data.From.County);
             }
+            if (!Data.To.Tel.IsNullOrEmpty())
+            {
+                dic.Add("d_tel", string.Join(",", Data.To.Tel));
+            }
+            if (!Data.To.Mobile.IsNullOrEmpty())
+            {
+                dic.Add("d_mobile", string.Join(",", Data.To.Mobile));
+            }
             if (!string.IsNullOrWhiteSpace(Data.To?.Province))
             {
                 dic.Add("d_province", Data.To.Province);
@@ -116,9 +158,21 @@ namespace Maydear.SFExpress.Internal.Requests
             {
                 dic.Add("d_country", Data.To.Country);
             }
+            if (!string.IsNullOrWhiteSpace(Data.To?.City))
+            {
+                dic.Add("d_city", Data.To.City);
+            }
             if (!string.IsNullOrWhiteSpace(Data.To?.County))
             {
                 dic.Add("d_county", Data.To.County);
+            }
+            if (!Data.To.Company.IsNullOrEmpty())
+            {
+                dic.Add("d_company", string.Join(",", Data.To.Company));
+            }
+            if (!Data.To.Contact.IsNullOrEmpty())
+            {
+                dic.Add("d_contact", string.Join(",", Data.To.Contact));
             }
             if (!string.IsNullOrWhiteSpace(Data.CustId))
             {

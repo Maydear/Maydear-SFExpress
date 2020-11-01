@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace SFExpressAspNetCoreSample.Controllers
+namespace Sample.Controllers
 {
     public class SubOrderRequestController : Controller
     {

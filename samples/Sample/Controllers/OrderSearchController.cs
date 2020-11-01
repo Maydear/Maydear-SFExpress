@@ -5,21 +5,20 @@ using System.Threading.Tasks;
 using Maydear.SFExpress;
 using Maydear.SFExpress.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
-namespace SFExpressAspNetCoreSample.Controllers
+namespace Sample.Controllers
 {
     [Route("OrderSearch")]
     public class OrderSearchController : Controller
     {
         private readonly SfExpressService sfExpressService;
+        private readonly ILogger<RouteController> logger;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sfExpressService"></param>
-        public OrderSearchController(SfExpressService sfExpressService)
+        public OrderSearchController(SfExpressService sfExpressService, ILogger<RouteController> logger)
         {
             this.sfExpressService = sfExpressService;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -33,7 +32,7 @@ namespace SFExpressAspNetCoreSample.Controllers
             {
                 OrderId = orderid,
                 SearchType = OrderSearchType.Normal
-            });
+            }, s => logger.LogWarning(s), s => logger.LogWarning(s));
         }
     }
 }

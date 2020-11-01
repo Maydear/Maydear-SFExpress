@@ -7,7 +7,7 @@ using Maydear.SFExpress.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace SFExpressAspNetCoreSample.Controllers
+namespace Sample.Controllers
 {
     /// <summary>
     /// 路由页面

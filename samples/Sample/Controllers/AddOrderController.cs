@@ -4,20 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Maydear.SFExpress;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
-namespace SFExpressAspNetCoreSample.Controllers
+namespace Sample.Controllers
 {
     public class AddOrderController : Controller
     {
         private readonly SfExpressService sfExpressService;
+        private readonly ILogger<RouteController> logger;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sfExpressService"></param>
-        public AddOrderController(SfExpressService sfExpressService)
+        public AddOrderController(SfExpressService sfExpressService, ILogger<RouteController> logger)
         {
             this.sfExpressService = sfExpressService;
+            this.logger = logger;
         }
 
         /// <summary>

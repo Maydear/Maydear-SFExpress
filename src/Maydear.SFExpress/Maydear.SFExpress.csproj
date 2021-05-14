@@ -33,10 +33,10 @@
     </ItemGroup>
     <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
         <PackageReference Include="Maydear" Version="3.1.210" />
-        <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.9" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.9" />
-        <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="3.1.9" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.9" />
-        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.9" />
+        <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.15" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.15" />
+        <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="3.1.15" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.15" />
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.15" />
     </ItemGroup>
 </Project>

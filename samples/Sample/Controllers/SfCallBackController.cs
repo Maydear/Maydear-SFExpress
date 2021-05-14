@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Maydear.SFExpress;
 using Microsoft.AspNetCore.Mvc;
@@ -28,10 +29,11 @@ namespace Sample.Controllers
             var resultString = "";
             try
             {
-                resultString = SfExpressNoticeTranslate.RouteProcess(content, s =>
+                resultString = SfExpressNoticeTranslate.RouteProcess(content, routeNode =>
                 {
                     //处理回调信息
-                    Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(s));
+                    ;
+                    Console.WriteLine(JsonSerializer.Serialize(routeNode));
                     return true;
                 });
             }
@@ -57,10 +59,10 @@ namespace Sample.Controllers
                 var resultString = "";
                 try
                 {
-                    resultString = SfExpressNoticeTranslate.RouteProcess(content, s =>
+                    resultString = SfExpressNoticeTranslate.RouteProcess(content, routeNode =>
                     {
                         //处理回调信息
-                        Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(s));
+                        Console.WriteLine(JsonSerializer.Serialize(routeNode));
                         return true;
                     });
                 }
@@ -84,9 +86,9 @@ namespace Sample.Controllers
             var resultString = "";
             try
             {
-                resultString = SfExpressNoticeTranslate.PushOrderStateProcess(content, s =>
+                resultString = SfExpressNoticeTranslate.PushOrderStateProcess(content, orderState =>
                 {
-                    Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(s));
+                    Console.WriteLine(JsonSerializer.Serialize(orderState));
                     return true;
                 });
             }
